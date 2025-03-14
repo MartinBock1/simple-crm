@@ -1,12 +1,10 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
   <mat-drawer #drawer class="sidenav" [opened]="true" mode="side">
-    <div class="logo-container">
-      Platz für Logo
-    </div>
+    <div class="logo-container">Platz für Logo</div>
 
     <ul class="menu-items">
-      <li><mat-icon>fact_check</mat-icon>Dashboard</li>
-      <li><mat-icon>person</mat-icon>User</li>
+      <li routerLink="dashboard"><mat-icon>fact_check</mat-icon>Dashboard</li>
+      <li routerLink="user"><mat-icon>person</mat-icon>User</li>
     </ul>
   </mat-drawer>
 
@@ -21,8 +19,5 @@
     <div class="router-container">
       <router-outlet></router-outlet>
     </div>
-    
   </div>
 </mat-drawer-container>
-
-
