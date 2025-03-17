@@ -1,0 +1,34 @@
+mat-card {
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.25);
+
+  .user-detail-header {
+    padding-left: 0;
+    padding-right: 0;
+    height: 250px;
+    background-color: #ff5b27;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+
+    >img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      padding-left: 16px;
+      border-radius: 100%;
+    }
+  }
+}
+
+.user-details {
+  height: 100px;
+  margin-left: 32px; 
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+
+  >h2 {
+    margin-bottom: 0;
+  }
+}
