@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogContent } from '@angular/material/dialog';
+import { MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCalendar, MatDatepickerModule } from '@angular/material/datepicker';
@@ -10,6 +10,7 @@ import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -24,6 +25,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatDatepickerModule,
     MatNativeDateModule,
     MatProgressBarModule,
+    MatCardModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
@@ -34,9 +36,8 @@ export class DialogAddUserComponent {
   firestore: Firestore = inject(Firestore);
   isLoading = false;
 
-  // loading() {
-  //   this.isLoading = !this.isLoading;
-  // }
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {}
+  // public dialogRef: MatDialogRef<DialogAddUserComponent>;
 
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();
@@ -58,6 +59,7 @@ export class DialogAddUserComponent {
       (result: any) => {
         this.isLoading = false;
         console.log('adding user finished ', result);
+        this.dialogRef.close();
       }
     );
   }
