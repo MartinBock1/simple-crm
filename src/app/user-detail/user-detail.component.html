@@ -1,21 +1,33 @@
+@if(user) {
 <mat-card appearance="outlined">
   <mat-card-content class="user-detail-header">
     <img src="assets/img/user.png" />
-    <div class="user-details">
-      <h2>Max Mustermann</h2>
-      email&#64;email.de
-    </div>
-  </mat-card-content>
-</mat-card>
+      <div class="user-details">
+        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+        {{ user.email }}
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
+  <mat-card class="mt-32" appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>Address</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="">
+      <div class="">
+        {{ user.birthDate}}<br />
+        {{ user.street}}<br />
+        {{ user.zipCode}} {{ user.city}}
+      </div>
+    </mat-card-content>
+  </mat-card>
 
-<mat-card class="mt-32" appearance="outlined">
-  <mat-card-header>
-    <mat-card-title>Address</mat-card-title>
-  </mat-card-header>
-  <mat-card-content class="">
-    <div class="">
-      Musterstr. 23 <br />
-      12345 Musterstadt
-    </div>
-  </mat-card-content>
-</mat-card>
+  <!-- Button, um den Bearbeitungsdialog zu öffnen -->
+  <button mat-raised-button color="primary" (click)="openEditDialog()">Bearbeiten</button>
+
+   <!-- <pre>{{ getUserAsJSON() }}</pre> -->
+}
+
+<div *ngIf="!user">
+  <p>Benutzer wird geladen...</p>
+</div>

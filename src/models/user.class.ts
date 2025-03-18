@@ -13,7 +13,7 @@ export class User {
   }
 
   // Gibt die Benutzerdaten als JSON zurück
-  toJSON() {
+  toJSON(): object {
     return {
       firstName: this.firstName,
       lastName: this.lastName,
