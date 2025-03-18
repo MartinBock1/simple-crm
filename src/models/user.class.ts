@@ -1,33 +1,27 @@
 export class User {
-  firstName: string;
-  lastName: string;
-  birthDate: number;
-  street: string;
-  zipCode: number;
-  city: string;
-  email: string;
-  id?: string; // Optionale ID
+  id: string = ''; // ID des Benutzers
+  firstName: string = ''; // Vorname
+  lastName: string = ''; // Nachname
+  email: string = ''; // E-Mail
+  zipCode: number = 0; // Postleitzahl
+  city: string = ''; // Stadt
+  birthDate: number = 0; // Geburtsdatum als Zeitstempel
+  street: string = ''; // Straße
 
-  constructor(obj?: any) {
-    this.firstName = obj ? obj.firstName : '';
-    this.lastName = obj ? obj.lastName : '';
-    this.birthDate = obj ? obj.birthDate : '';
-    this.street = obj ? obj.street : '';
-    this.zipCode = obj ? obj.zipCode : '';
-    this.city = obj ? obj.city : '';
-    this.email = obj ? obj.email : '';
-    this.id = obj ? obj.id : undefined; // Falls vorhanden, wird die ID zugewiesen
+  constructor(init?: Partial<User>) {
+    Object.assign(this, init); // Erlaubt das einfache Initialisieren des User-Objekts
   }
 
-  public toJSON() {
+  // Gibt die Benutzerdaten als JSON zurück
+  toJSON() {
     return {
       firstName: this.firstName,
       lastName: this.lastName,
-      birthDate: this.birthDate,
-      street: this.street,
+      email: this.email,
       zipCode: this.zipCode,
       city: this.city,
-      email: this.email,
+      birthDate: this.birthDate,
+      street: this.street,
       id: this.id, // ID in die JSON-Ausgabe einfügen
     };
   }

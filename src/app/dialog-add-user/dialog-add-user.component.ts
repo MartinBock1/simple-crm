@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -30,37 +31,26 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
 })
+//
 export class DialogAddUserComponent {
-  user = new User();
-  birthDate!: Date;
-  firestore: Firestore = inject(Firestore);
-  isLoading = false;
+  user = new User(); // Neuen User erstellen
+  birthDate!: Date; // Geburtsdatum des Users
+  isLoading = false; // Zeigt an, ob gerade geladen wird
 
-  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {}
-  // public dialogRef: MatDialogRef<DialogAddUserComponent>;
+  constructor(
+    public dialogRef: MatDialogRef<DialogAddUserComponent>,
+    private userService: UserService
+  ) {}
 
+  // Methode zum Speichern des Benutzers
   saveUser() {
-    this.user.birthDate = this.birthDate.getTime();
-    console.log('Current user is: ', this.user);
+    this.user.birthDate = this.birthDate.getTime(); // Geburtsdatum auf Zeitstempel setzen
+    this.isLoading = true; // Setzt die Ladeanzeige aktiv
 
-    this.isLoading = true;
-
-    // this.firestore
-    //   .collection('users')
-    //   .add(this.user.toJSON())
-    //   .then((result: any) => {
-    //     console.log('adding user finished ', result);
-    //   });
-    // Get the Firestore instance correctly
-    const firestoreInstance = this.firestore;
-
-    // Use the collection method and addDoc to add the user
-    addDoc(collection(this.firestore, 'users'), this.user.toJSON()).then(
-      (result: any) => {
-        this.isLoading = false;
-        console.log('adding user finished ', result);
-        this.dialogRef.close();
-      }
-    );
+    // Benutzer über den UserService speichern
+    this.userService.addUser(this.user).then(() => {
+      this.isLoading = false; // Ladeanzeige deaktivieren
+      this.dialogRef.close(); // Dialog schließen
+    });
   }
 }
