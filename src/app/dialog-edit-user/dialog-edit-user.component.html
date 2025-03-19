@@ -2,58 +2,65 @@
   @if(isLoading) {
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   }
-  <h2 mat-dialog-title>Benutzer bearbeiten</h2>
+  <h2 mat-dialog-title>Benutzer bearbeiten</h2> 
+
   <mat-dialog-content>
     <form>
-      <!-- Vorname -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Vorname</mat-label>
-        <input
-          matInput
-          [disabled]="isLoading"
-          [(ngModel)]="user.firstName"
-          name="firstName"
-        />
-      </mat-form-field>
+      <div>
+        <!-- Vorname -->
+        <mat-form-field appearance="fill" class="mr-16" >
+          <mat-label>Vorname</mat-label>
+          <input
+            matInput
+            [disabled]="isLoading"
+            [(ngModel)]="user.firstName"
+            name="firstName"
+          />
+        </mat-form-field>
 
-      <!-- Nachname -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Nachname</mat-label>
-        <input
-          matInput
-          [disabled]="isLoading"
-          [(ngModel)]="user.lastName"
-          name="lastName"
-        />
-      </mat-form-field>
+        <!-- Nachname -->
+        <mat-form-field appearance="fill">
+          <mat-label>Nachname</mat-label>
+          <input
+            matInput
+            [disabled]="isLoading"
+            [(ngModel)]="user.lastName"
+            name="lastName"
+          />
+        </mat-form-field>
+      </div>
 
-      <!-- Email -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Email</mat-label>
-        <input
-          matInput
-          [disabled]="isLoading"
-          [(ngModel)]="user.email"
-          name="email"
-        />
-      </mat-form-field>
+      <div>
+        <!-- Email -->
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            [disabled]="isLoading"
+            [(ngModel)]="user.email"
+            name="email"
+          />
+        </mat-form-field>
+      </div>
 
+      <div>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Geburtsdatum</mat-label>
+          <input
+            matInput
+            [disabled]="isLoading"
+            [(ngModel)]="user.birthDate"
+            name="birthDate"
+            [matDatepicker]="picker"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
       <!-- Geburtsdatum -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Geburtsdatum</mat-label>
-        <input
-          matInput
-          [disabled]="isLoading"
-          [(ngModel)]="user.birthDate"
-          name="birthDate"
-          [matDatepicker]="picker"
-        />
-        <mat-datepicker-toggle
-          matIconSuffix
-          [for]="picker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
     </form>
   </mat-dialog-content>
 

@@ -2,42 +2,46 @@
   @if(isLoading) {
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   }
-  
+
   <h2 mat-dialog-title>Benutzer bearbeiten</h2>
   <mat-dialog-content>
     <form>
+      <div>
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Strasse</mat-label>
+          <input
+            matInput
+            [disabled]="isLoading"
+            [(ngModel)]="user.street"
+            name="street"
+          />
+        </mat-form-field>
+      </div>
       <!-- Straße -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Strasse</mat-label>
-        <input
-          matInput
-          [disabled]="isLoading"
-          [(ngModel)]="user.street"
-          name="street"
-        />
-      </mat-form-field>
 
+      <div>
+        <mat-form-field appearance="fill" class="mr-16">
+          <mat-label>PLZ</mat-label>
+          <input
+            matInput
+            [disabled]="isLoading"
+            [(ngModel)]="user.zipCode"
+            name="zipCode"
+          />
+        </mat-form-field>
+  
+        <!-- Stadt -->
+        <mat-form-field appearance="fill">
+          <mat-label>Stadt</mat-label>
+          <input
+            matInput
+            [disabled]="isLoading"
+            [(ngModel)]="user.city"
+            name="city"
+          />
+        </mat-form-field>
+      </div>
       <!-- PLZ -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>PLZ</mat-label>
-        <input
-          matInput
-          [disabled]="isLoading"
-          [(ngModel)]="user.zipCode"
-          name="zipCode"
-        />
-      </mat-form-field>
-
-      <!-- Stadt -->
-      <mat-form-field appearance="fill" class="full-width">
-        <mat-label>Stadt</mat-label>
-        <input
-          matInput
-          [disabled]="isLoading"
-          [(ngModel)]="user.city"
-          name="city"
-        />
-      </mat-form-field>
     </form>
   </mat-dialog-content>
 

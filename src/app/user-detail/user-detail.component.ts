@@ -55,7 +55,6 @@ export class UserDetailComponent implements OnInit {
   openEditUserDialog(): void {
     if (this.user) {
       const dialogRef = this.dialog.open(DialogEditUserComponent, {
-        width: '400px',
         data: this.user,
       });
 
@@ -70,7 +69,6 @@ export class UserDetailComponent implements OnInit {
   openEditAddressDialog(): void {
     if (this.user) {
       const dialogRef = this.dialog.open(DialogEditAddressComponent, {
-        width: '400px',
         data: this.user,
       });
 

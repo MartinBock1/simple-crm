@@ -36,21 +36,20 @@ export class DialogEditAddressComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditAddressComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: User, // Die Daten werden vom Haupt-Component übergeben
+    @Inject(MAT_DIALOG_DATA) public data: User, 
     private userService: UserService
   ) {
     this.user = new User(data);
   }
 
-  // Speichern der bearbeiteten Benutzerdaten
   saveAddress(): void {
     this.isLoading = true;
     this.userService
       .updateUser({ ...this.user } as User)
       .then(() => {
-        this.isLoading = false; // Ladeanzeige deaktivieren
+        this.isLoading = false; 
         console.log('Benutzer erfolgreich aktualisiert');
-        this.dialogRef.close(true); // Schließt den Dialog und gibt `true` zurück
+        this.dialogRef.close(true); 
       })
       .catch((error) => {
         console.error('Fehler beim Aktualisieren des Benutzers:', error);

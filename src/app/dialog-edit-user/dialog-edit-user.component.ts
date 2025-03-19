@@ -1,11 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../models/user.class';
-import { UserService } from '../services/user.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   MatNativeDateModule,
@@ -18,6 +16,8 @@ import {
   MatDialogRef,
   MatDialogModule,
 } from '@angular/material/dialog';
+import { User } from '../../models/user.class';
+import { UserService } from '../services/user.service';
 
 export const EURO_DATE_FORMATS = {
   parse: {
