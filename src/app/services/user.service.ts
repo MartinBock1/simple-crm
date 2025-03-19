@@ -50,6 +50,14 @@ export class UserService {
     });
   }
 
+  defaultSettingsDatePicker(user: User) {
+    if (user.birthDate) {
+      user.birthDate = new Date(user.birthDate); // Konvertiere Zahl/Zeitstempel in ein Date-Objekt
+    } else {
+      user.birthDate = new Date(); // Falls kein Datum vorhanden ist, aktuelles Datum setzen
+    }
+  }
+
   // Wandelt Firestore-Daten in ein User-Objekt um
   public mapToUser(doc: DocumentSnapshot<DocumentData>): User {
     const docData = doc.data();
