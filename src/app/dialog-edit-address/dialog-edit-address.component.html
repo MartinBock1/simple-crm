@@ -1,0 +1,52 @@
+<div class="dialog-container">
+  @if(isLoading) {
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  }
+  
+  <h2 mat-dialog-title>Benutzer bearbeiten</h2>
+  <mat-dialog-content>
+    <form>
+      <!-- Straße -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Strasse</mat-label>
+        <input
+          matInput
+          [disabled]="isLoading"
+          [(ngModel)]="user.street"
+          name="street"
+        />
+      </mat-form-field>
+
+      <!-- PLZ -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>PLZ</mat-label>
+        <input
+          matInput
+          [disabled]="isLoading"
+          [(ngModel)]="user.zipCode"
+          name="zipCode"
+        />
+      </mat-form-field>
+
+      <!-- Stadt -->
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Stadt</mat-label>
+        <input
+          matInput
+          [disabled]="isLoading"
+          [(ngModel)]="user.city"
+          name="city"
+        />
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-flat-button color="warn" (click)="dialogRef.close()">
+      Abbrechen
+    </button>
+    <button mat-raised-button color="primary" (click)="saveAddress()">
+      Speichern
+    </button>
+  </mat-dialog-actions>
+</div>

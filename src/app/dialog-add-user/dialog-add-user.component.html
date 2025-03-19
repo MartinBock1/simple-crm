@@ -96,7 +96,16 @@
     </div>
   </div>
   <div mat-dialog-actions>
-    <button [disabled]="isLoading" mat-button (click)="dialogRef.close()">Cancel</button>
-    <button [disabled]="isLoading" mat-button (click)="saveUser()" cdkFocusInitial>Save</button>
+    <button [disabled]="isLoading" mat-button (click)="dialogRef.close()">
+      Cancel
+    </button>
+    <button
+      [disabled]="isLoading"
+      mat-button
+      (click)="saveUser()"
+      cdkFocusInitial
+    >
+      Save
+    </button>
   </div>
 </div>

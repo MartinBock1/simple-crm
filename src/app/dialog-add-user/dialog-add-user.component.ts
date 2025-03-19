@@ -35,24 +35,22 @@ import { UserService } from '../services/user.service';
 })
 //
 export class DialogAddUserComponent {
-  user = new User(); // Neuen User erstellen
-  birthDate!: Date; // Geburtsdatum des Users
-  isLoading = false; // Zeigt an, ob gerade geladen wird
+  user = new User(); 
+  birthDate!: Date; 
+  isLoading = false; 
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddUserComponent>,
     private userService: UserService
   ) {}
-
-  // Methode zum Speichern des Benutzers
+  
   saveUser() {
-    this.user.birthDate = this.birthDate.getTime(); // Geburtsdatum auf Zeitstempel setzen
-    this.isLoading = true; // Setzt die Ladeanzeige aktiv
+    this.user.birthDate = this.birthDate.getTime(); 
+    this.isLoading = true; 
 
-    // Benutzer über den UserService speichern
     this.userService.addUser(this.user).then(() => {
-      this.isLoading = false; // Ladeanzeige deaktivieren
-      this.dialogRef.close(); // Dialog schließen
+      this.isLoading = false; 
+      this.dialogRef.close(); 
     });
   }
 }

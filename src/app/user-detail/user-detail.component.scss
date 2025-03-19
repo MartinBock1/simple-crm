@@ -18,11 +18,18 @@ mat-card {
       border-radius: 100%;
     }
   }
+
+  .pin-right-upper-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
 }
 
 .user-details {
   height: 100px;
-  margin-left: 32px; 
+  margin-left: 32px;
   display: flex;
   align-items: flex-start;
   justify-content: center;

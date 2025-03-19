@@ -1,30 +1,39 @@
 @if(user) {
 <mat-card appearance="outlined">
+  <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="userMenu" >
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu">
+  <button mat-menu-item (click)="openEditUserDialog()">Edit</button>
+</mat-menu>
   <mat-card-content class="user-detail-header">
     <img src="assets/img/user.png" />
-      <div class="user-details">
-        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
-        {{ user.email }}
-      </div>
-    </mat-card-content>
-  </mat-card>
+    <div class="user-details">
+      <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+      {{ user.email }}
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="mt-32" appearance="outlined">
+  <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="addressMenu" >
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <mat-menu #addressMenu="matMenu">
+  <button mat-menu-item (click)="openEditAddressDialog()">Edit</button>
+</mat-menu>
   
-  <mat-card class="mt-32" appearance="outlined">
-    <mat-card-header>
-      <mat-card-title>Address</mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="">
-      <div class="">
-        {{ user.street}}<br />
-        {{ user.zipCode}} {{ user.city}}
-      </div>
-    </mat-card-content>
-  </mat-card>
-
-  <!-- Button, um den Bearbeitungsdialog zu öffnen -->
-  <button mat-raised-button color="primary" (click)="openEditDialog()">Bearbeiten</button>
-
-   <!-- <pre>{{ getUserAsJSON() }}</pre> -->
+  <mat-card-header>
+    <mat-card-title>Address</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="">
+    <div class="">
+      {{ user.street }}<br />
+      {{ user.zipCode }} {{ user.city }}
+    </div>
+  </mat-card-content>
+</mat-card>
 }
 
 <div *ngIf="!user">

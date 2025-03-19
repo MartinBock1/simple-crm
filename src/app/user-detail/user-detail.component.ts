@@ -1,29 +1,37 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { doc, Firestore, onSnapshot } from '@angular/fire/firestore';
-import { MatCardModule } from '@angular/material/card';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 import { UserService } from '../services/user.service'; // Importiere den UserService
 import { User } from '../../models/user.class';
-import { CommonModule } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component'; // Dialog zum Bearbeiten importieren
+import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component'; 
+import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+  ],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss',
 })
 export class UserDetailComponent implements OnInit {
-  userId: string = ''; // Die ID des Benutzers
-  user: User | null = null; // Der Benutzer, der angezeigt werden soll
-  unsubscribe: () => void = () => {}; // Variable für die Unsubscribe-Funktion
+  userId: string = '';
+  user: User | null = null;
+  unsubscribe: () => void = () => {};
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private firestore: Firestore,
     public dialog: MatDialog
   ) {}
 
@@ -37,59 +45,43 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  // // Echtzeit-Daten mit onSnapshot laden
-  // fetchUser(id: string): void {
-  //   const userRef = doc(this.firestore, 'users', id);
-  //   this.unsubscribe = onSnapshot(userRef, (docSnapshot) => {
-  //     if (docSnapshot.exists()) {
-  //       this.user = this.userService.mapToUser(docSnapshot);
-  //       console.log('Retrieved user:', this.user); // Ausgabe der Benutzerdaten in der Konsole
-  //     } else {
-  //       console.log('user not found');
-  //       this.user = null;
-  //     }
-  //   });
-  // }
-
-  // ngOnDestroy(): void {
-  //   // Unsubscribe beim Zerstören der Komponente
-  //   if (this.unsubscribe) {
-  //     this.unsubscribe();
-  //   }
-  // }
-
-  // getUserAsJSON(): string {
-  //   return this.user
-  //     ? JSON.stringify(this.user, null, 2)
-  //     : 'Benutzer nicht gefunden';
-  // }
-  // Öffnet den Dialog zum Bearbeiten des Benutzers
-
-  // Abrufen des Benutzers aus Firestore
   fetchUser(id: string): void {
     this.userService.getUserById(id).then((user) => {
       this.user = user;
       console.log('Benutzer geladen:', this.user);
     });
   }
-  
-  openEditDialog(): void {
+
+  openEditUserDialog(): void {
     if (this.user) {
       const dialogRef = this.dialog.open(DialogEditUserComponent, {
-        width: '400px', // Größe des Dialogs
-        data: this.user, // Die Benutzerdaten werden dem Dialog übergeben
+        width: '400px',
+        data: this.user,
       });
 
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
-          // Benutzer neu laden, nachdem die Änderungen gespeichert wurden
+          this.fetchUser(this.userId);
+        }
+      });
+    }
+  }
+  
+  openEditAddressDialog(): void {
+    if (this.user) {
+      const dialogRef = this.dialog.open(DialogEditAddressComponent, {
+        width: '400px',
+        data: this.user,
+      });
+
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
           this.fetchUser(this.userId);
         }
       });
     }
   }
 
-  // Gibt die Benutzerdaten als JSON aus (nur zur Anzeige)
   getUserAsJSON(): string {
     return this.user
       ? JSON.stringify(this.user, null, 2)
