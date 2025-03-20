@@ -23,6 +23,7 @@ export const appConfig: ApplicationConfig = {
         })
       )
     ),
+    
     importProvidersFrom(provideFirestore(() => getFirestore())),
   ],
 };

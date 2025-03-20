@@ -1,16 +1,16 @@
-import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { User } from '../../models/user.class';
-import { UserService } from '../services/user.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { Component, Inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,
   MatDialogModule,
 } from '@angular/material/dialog';
+import { User } from '../../models/user.class';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dialog-edit-address',
