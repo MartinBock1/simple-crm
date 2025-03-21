@@ -34,22 +34,43 @@ import { UserService } from '../services/user.service';
 })
 //
 export class DialogAddUserComponent {
-  user = new User(); 
-  birthDate!: Date; 
-  isLoading = false; 
+  user = new User();
+  birthDate!: Date;
+  isLoading = false;
 
+  /**
+   * Constructor for initializing the DialogAddUserComponent.
+   *
+   * This constructor accepts dependencies that are injected by Angular's dependency injection system.
+   * The `dialogRef` is used to interact with the dialog window, and `userService` is used to manage user-related data.
+   *
+   * @param {MatDialogRef<DialogAddUserComponent>} dialogRef - Reference to the dialog window, allowing the component to control its state (open/close).
+   * @param {UserService} userService - Service for handling user data operations, such as adding, updating, and fetching users.
+   * @constructor
+   * @memberof DialogAddUserComponent
+   */
   constructor(
     public dialogRef: MatDialogRef<DialogAddUserComponent>,
     private userService: UserService
   ) {}
-  
+
+  /**
+   * Saves the user by setting the birthDate and calling the user service to add the user.
+   *
+   * This method updates the user's birthDate to its timestamp, sets the loading state to true,
+   * and then makes a call to the user service to add the user. Once the user is successfully added,
+   * it sets the loading state to false and closes the dialog.
+   *
+   * @function saveUser
+   * @memberof YourComponent
+   */
   saveUser() {
-    this.user.birthDate = this.birthDate.getTime(); 
-    this.isLoading = true; 
+    this.user.birthDate = this.birthDate.getTime();
+    this.isLoading = true;
 
     this.userService.addUser(this.user).then(() => {
-      this.isLoading = false; 
-      this.dialogRef.close(); 
+      this.isLoading = false;
+      this.dialogRef.close();
     });
   }
 }
